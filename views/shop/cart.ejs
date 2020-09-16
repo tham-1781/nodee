@@ -1,0 +1,61 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <h2>Your cart</h2>
+
+        <% if (products.length > 0) { %>
+            <div class="shopping-cart">
+                <div class="column-labels">
+                  <label class="product-image">Image</label>
+                  <label class="product-details">Product</label>
+                  <label class="product-price">Price</label>
+                  <label class="product-quantity">Quantity</label>
+                  <label class="product-removal">Remove</label>
+                  <label class="product-line-price">Total</label>
+                </div>
+
+                <% products.forEach(c => { %>
+                    <div class="product">
+                        <div class="product-image">
+                          <img src="<%= c.product.imageUrl %>">
+                        </div>
+                        <div class="product-details">
+                          <div class="product-title"><%= c.product.title %></div>
+                          <p class="product-description"><%= c.product.description %></p>
+                        </div>
+                        <div class="product-price"><%= c.price %> </div>
+                        <div class="product-quantity">
+                          <input type="number" value="<%= c.qty %>" min="1">
+                        </div>
+                        <div class="product-removal">
+                          <form action="/cart-delete" method="post">
+                            <input type="hidden" name="productId" value="<%= c.product.id %>">
+                            <button type="submit" class="remove-product">
+                                Remove
+                            </button>
+                          </form>
+                        </div>
+                        <div class="product-line-price">25.98</div>
+                      </div>
+                <% }) %>
+
+                <div class="totals">
+                  <div class="totals-item totals-item-total">
+                    <label>Grand Total</label>
+                    <div class="totals-value" id="cart-total"><%= cart.totalPrice %> </div>
+                  </div>
+                </div>
+
+                    <button class="btn checkout">Checkout</button>
+
+              </div>
+        <% } else { %>
+            <p class="centered">No items in your cart</p>
+        <% } %>
+    </main>
+<%- include('../includes/end.ejs') %>
