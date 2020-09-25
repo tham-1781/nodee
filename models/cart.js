@@ -4,7 +4,7 @@ const path = require('path');
 const dataPath = path.join(
   path.dirname(process.mainModule.filename),
   'data',
-  'cart.json'
+  'cart.json',
 );
 
 module.exports = class Cart {
@@ -22,7 +22,7 @@ module.exports = class Cart {
       }
 
       const existingProductIndex = cart.products.findIndex(
-        (p) => p.id === product.id
+        (p) => p.id === product._id,
       );
       const existingProduct = cart.products[existingProductIndex];
       let updatedProduct;
@@ -31,7 +31,7 @@ module.exports = class Cart {
         cart.products = [...cart.products];
         cart.products[existingProductIndex] = updatedProduct;
       } else {
-        updatedProduct = { id: product.id, qty: 1, price: +product.price };
+        updatedProduct = { id: product._id, qty: 1, price: +product.price };
         cart.products = [...cart.products, updatedProduct];
       }
       cart.totalPrice = cart.totalPrice + +product.price;

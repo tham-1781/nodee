@@ -4,6 +4,6 @@ module.exports = class ProductFormPresenter {
     this.pageTitle = pageTitle;
     this.path = path;
     this.editing = editing;
-    this.formData = { method: 'POST', action: '/admin/products/create' };
+    this.formData = { method: 'POST', action: '/admin/save-product' };
   }
 };

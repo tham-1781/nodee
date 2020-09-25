@@ -34,7 +34,7 @@
                         </div>
                         <div class="product-removal">
                           <form action="/cart-delete" method="post">
-                            <input type="hidden" name="productId" value="<%= c.product.id %>">
+                            <input type="hidden" name="productId" value="<%= c.product._id %>">
                             <button type="submit" class="remove-product">
                                 Remove
                             </button>

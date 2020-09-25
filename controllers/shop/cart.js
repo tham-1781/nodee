@@ -6,7 +6,7 @@ exports.getIndex = (req, res, next) => {
     Product.fetchAll((products) => {
       const cartProducts = [];
       for (product of products) {
-        const cartProductData = cart.products.find((p) => p.id === product.id);
+        const cartProductData = cart.products.find((p) => p.id === product._id);
         if (cartProductData) {
           cartProducts.push({
             product,
@@ -27,7 +27,7 @@ exports.getIndex = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const { productId } = req.body;
-  Product.findById(+productId, (product) => {
+  Product.findById(productId, (product) => {
     Cart.addProduct(product);
   });
   res.redirect('/cart');
